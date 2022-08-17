@@ -1,12 +1,30 @@
 {% macro generate_alias_name(custom_alias_name=none, node=none) -%}
-    {%- if custom_alias_name is none -%}
+{%- set cust_schema_name = "customschema"-%}  
 
-       {{ custom_schema_name ~ '__' ~ node.name }}
+    {%- if 'dev' in target.name.lower() -%}
 
+        {%- if custom_alias_name is none -%}
+
+            {{ cust_schema_name  ~ '__' ~ node.name }}
+
+        {%- else -%}
+
+            {{ cust_schema_name  ~ '__' ~ (custom_alias_name | trim) }}
+
+        {%- endif -%}
+    
     {%- else -%}
 
-        {{ custom_alias_name | trim }}
+        {%- if custom_alias_name is none -%}
 
+            {{ node.name }}
+
+        {%- else -%}
+
+            {{ custom_alias_name | trim }}
+
+        {%- endif -%}
+        
     {%- endif -%}
 
 {%- endmacro %}
