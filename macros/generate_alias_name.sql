@@ -1,15 +1,14 @@
-{% macro generate_alias_name(custom_alias_name=none, node=none) -%}
-{%- set cust_schema_name = "customschema"-%}  
+{% macro generate_alias_name(custom_alias_name=none,node=none) -%}
 
     {%- if 'dev' in target.name.lower() -%}
 
         {%- if custom_alias_name is none -%}
 
-            {{ cust_schema_name  ~ '__' ~ node.name }}
+            {{ node.config.schema ~ '__' ~ node.name }}
 
         {%- else -%}
 
-            {{ cust_schema_name  ~ '__' ~ (custom_alias_name | trim) }}
+            {{ node.config.schema ~ '__' ~ (custom_alias_name | trim) }}
 
         {%- endif -%}
     
@@ -24,7 +23,7 @@
             {{ custom_alias_name | trim }}
 
         {%- endif -%}
-        
+
     {%- endif -%}
 
 {%- endmacro %}
