@@ -11,7 +11,7 @@
 
 with source_data as (
 
-    select 1 as id, 'abc' as NewColumn
+    select 1 as id, 'abc' as NewColumn 
     union all
     select null as id, 'def' as NewColumn
     union all 
