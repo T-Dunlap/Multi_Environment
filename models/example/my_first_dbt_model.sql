@@ -11,11 +11,11 @@
 
 with source_data as (
 
-    select 1 as id
+    select 1 as id, 'abc' as NewColumn
     union all
-    select null as id
+    select null as id, 'def' as NewColumn
     union all 
-    select 3 as id
+    select 3 as id, 'ghi' as NewColumn
 
 )
 
