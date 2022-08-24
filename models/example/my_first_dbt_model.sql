@@ -8,7 +8,7 @@ with source_data as (
     union all 
     select 3 as id, 'ghi' as Column1
     union all
-    select null as id, 'xyz' as Column1
+    select 4 as id, 'xyz' as Column1
 
 )
 
