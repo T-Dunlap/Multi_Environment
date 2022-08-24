@@ -7,6 +7,9 @@ with source_data as (
     select 2 as id, 'def' as Column1
     union all 
     select 3 as id, 'ghi' as Column1
+    union all
+    select 4 as id, 'xyz' as Column1
+
 )
 
 select *
