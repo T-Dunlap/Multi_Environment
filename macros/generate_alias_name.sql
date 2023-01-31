@@ -1,18 +1,22 @@
-{% macro generate_alias_name(custom_alias_name=none,node=none) -%}
+{% macro generate_alias_name(custom_alias_name=none, node=none) -%}
+    {% do return(adapter.dispatch('generate_alias_name', 'dbt')(custom_alias_name, node)) %}
+{%- endmacro %}
 
-    {%- if 'dev' in target.name.lower() -%}
+{% macro default__generate_alias_name(custom_alias_name=none, node=none) -%}
+
+    {%- if target.name == 'dev' or target.name == 'ci' -%}
 
         {%- if custom_alias_name is none -%}
 
-            {{ node.config.schema ~ '__' ~ node.name }}
+            {{ target.schema }}__{{ node.config.schema }}__{{ node.name }}
 
         {%- else -%}
 
-            {{ node.config.schema ~ '__' ~ (custom_alias_name | trim) }}
+            {{ target.schema }}__{{ node.config.schema }}__{{ (custom_alias_name | trim) }}
 
         {%- endif -%}
-    
-    {%- else -%}
+
+    {%- else  -%}
 
         {%- if custom_alias_name is none -%}
 
@@ -25,5 +29,7 @@
         {%- endif -%}
 
     {%- endif -%}
+
+
 
 {%- endmacro %}
