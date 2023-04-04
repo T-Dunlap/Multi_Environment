@@ -36,6 +36,11 @@ models:
     # Applies to all files under models/example/
     finance:
       materialized: view
-      schema: financeschema
+      database: "{{ env_var('DBT_FINANCE_DATABASE') }}"
+      schema: finance
     operations:
+      materialized: view
+      database: "{{ env_var('DBT_OPERATIONS_DATABASE') }}"
+      schema: operations
+    default: 
       materialized: view
